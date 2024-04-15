@@ -18,9 +18,12 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -60,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
     private OutputStream outputS;
     private ProgressDialog progressDialog;
     private boolean isCon = false;
+    BluetoothAdapter bluetoothAdapter;
+    ArrayList<String> pairedDeviceArrayList;
+    ArrayAdapter<String> pairedDeviceAdapter;
+    ListView listViewPairedDevice;
+    private UUID myUUID;
+    private BluetoothSocket bluetoothSocket;
+    private OutputStream outputStream;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +98,17 @@ public class MainActivity extends AppCompatActivity {
         deviceInfo1 = findViewById(R.id.deviceInfo1);
         deviceInfo2 = findViewById(R.id.deviceInfo2);
         textView2 =findViewById(R.id.textView2);
+        SeekBar servoSlider1 = findViewById(R.id.servoBaseSlider); // Для сервопривода M
+        SeekBar servoSlider2 = findViewById(R.id.leftServoSlider); // Для сервопривода L
+        SeekBar servoSlider3 = findViewById(R.id.rightServoSlider); // Для сервопривода R
+        SeekBar servoSlider4 = findViewById(R.id.clawBtn); // Для сервопривода C
+
+        // Створення слухачів для кожного SeekBar
+        setupSeekBar(servoSlider1, "M");
+        setupSeekBar(servoSlider2, "L");
+        setupSeekBar(servoSlider3, "R");
+        setupSeekBar(servoSlider4, "C");
+
 
         checkBlue();
         init();
@@ -111,10 +132,9 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     if (progressDialog != null && progressDialog.isShowing()) {
                         connectToBluetoothDevice(deviceMAC);
-                        setTextView(deviceName);
-                        textView2.setText("");
-                        tempView.setText("Температура:");
-                        humView.setText("Вологість:");
+                        textView2.setText(deviceName);
+                        tempView.setText("");
+                        humView.setText("");
 
                     }
                 }
@@ -129,6 +149,25 @@ public class MainActivity extends AppCompatActivity {
             updateTextView();
             handler.postDelayed(updateTextViewRunnable, 100);
         }
+    }
+    private void setupSeekBar(SeekBar seekBar, final String commandPrefix) {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    String command = commandPrefix + progress + '\n';
+                    write(command.getBytes());
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     }
 
     private void init() {
@@ -416,6 +455,15 @@ public class MainActivity extends AppCompatActivity {
     public void dismissProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
+        }
+    }
+    public void write(byte[] bytes) {
+        try {
+            if (outputStream != null) {
+                outputStream.write(bytes);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
