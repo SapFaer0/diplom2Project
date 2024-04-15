@@ -6,4 +6,8 @@
     <string name="diode_off">Diode OFF</string>
     <string name="fan_on">Fan ON</string>
     <string name="fan_off">Fan OFF</string>
+    <string name="text_main">Середній</string>
+    <string name="text_right">Правий</string>
+    <string name="text_left">Лівий</string>
+    <string name="text_claw">Клешня</string>
 </resources>

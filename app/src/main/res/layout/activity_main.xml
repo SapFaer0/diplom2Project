@@ -60,24 +60,25 @@
             android:text="ОК"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.692"
             app:layout_constraintStart_toEndOf="@+id/timeout"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.781" />
+            app:layout_constraintVertical_bias="0.961"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/connectedDevices"
-            android:layout_width="159dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:text="Пристрій підключенно:"
             android:textAlignment="viewStart"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.178"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="0.099"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.236" />
+            app:layout_constraintVertical_bias="0.052" />
 
         <EditText
             android:id="@+id/timeout"
@@ -93,7 +94,8 @@
             app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.788" />
+            app:layout_constraintVertical_bias="0.788"
+            android:visibility="invisible"/>
 
         <ToggleButton
             android:id="@+id/DIODE_ON"
@@ -107,7 +109,8 @@
             app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.565" />
+            app:layout_constraintVertical_bias="0.565"
+            android:visibility="invisible"/>
 
         <ToggleButton
             android:id="@+id/HEATER_ON"
@@ -121,7 +124,8 @@
             app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.451" />
+            app:layout_constraintVertical_bias="0.451"
+            android:visibility="invisible"/>
 
         <ToggleButton
             android:id="@+id/FAN_ON"
@@ -135,32 +139,133 @@
             app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.336" />
+            app:layout_constraintVertical_bias="0.336"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="204dp"
             android:layout_height="49dp"
-            android:text="Вишневський Олександр 421КСМ-11"
+            android:text="Гарькавий Назар 420КСМ-9(Б)"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.983" />
+            app:layout_constraintVertical_bias="0.961" />
+
+        <SeekBar
+            android:id="@+id/leftServoSlider"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:max="100"
+            android:min="0"
+            android:progress="50"
+            android:rotation="90"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clawBtn"
+            app:layout_constraintWidth_percent="0.4" />
+
+        <SeekBar
+            android:id="@+id/rightServoSlider"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:max="100"
+            android:min="0"
+            android:progress="50"
+            android:rotation="90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clawBtn"
+            app:layout_constraintWidth_percent="0.4" />
+
+        <SeekBar
+            android:id="@+id/servoBaseSlider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/leftServoSlider"
+            android:layout_marginTop="300dp"
+            android:max="100"
+            android:min="0"
+            android:progress="50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clawBtn"
+            app:layout_constraintWidth_percent="0.4" />
+
+        <SeekBar
+            android:id="@+id/clawBtn"
+            android:layout_width="264dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="156dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textClaw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_claw"
+            android:textSize="22sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/clawBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="@string/text_left"
+            android:textSize="22sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/leftServoSlider"
+            app:layout_constraintEnd_toEndOf="@+id/leftServoSlider"
+            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="@string/text_right"
+            android:textSize="22sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/rightServoSlider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rightServoSlider" />
+
+        <TextView
+            android:id="@+id/textMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_main"
+            android:textSize="22sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/servoBaseSlider"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="95dp"
+            android:layout_width="wrap_content"
             android:layout_height="47dp"
             android:text="КЕМТ"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.844"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.052" />
+            app:layout_constraintVertical_bias="0.038" />
 
         <TextView
             android:id="@+id/textView"
@@ -205,7 +310,8 @@
             app:layout_constraintHorizontal_bias="0.479"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.68" />
+            app:layout_constraintVertical_bias="0.68"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/connectBlueButton"
@@ -216,10 +322,10 @@
             android:textColorLink="#5E4848"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.137" />
+            app:layout_constraintVertical_bias="0.877" />
 
         <TextView
             android:id="@+id/bluetoothsurName"
